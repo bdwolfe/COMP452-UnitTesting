@@ -66,8 +66,8 @@ public class Sample {
             sumOfSquares += (val - avg) * (val - avg);
         }
 
-        double denom = (usePopStdDev ? size() : size()-1);
-        return Math.sqrt( sumOfSquares / denom );
+        double denominator = (usePopStdDev ? size() : size()-1);
+        return Math.sqrt( sumOfSquares / denominator );
     }
 
     /**

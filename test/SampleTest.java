@@ -29,11 +29,23 @@ class SampleTest {
     }
 
     @Test
-    void meanNegatives(){
+    void meanNegativeValue(){
         Sample sample = new Sample();
         sample.addValue(-20.0);
         sample.addValue(50.0);
         sample.addValue(0.0);
+
+        // use the third argument to allow for floating-point rounding differences
         assertEquals(10.0, sample.mean(), tol);
+    }
+
+    @Test
+    void meanPositiveValues(){
+        Sample sample = new Sample();
+        sample.addValue(25.3);
+        sample.addValue(4.8);
+        sample.addValue(2.93);
+        sample.addValue(100.0);
+        assertEquals(33.2575, sample.mean(), tol);
     }
 }

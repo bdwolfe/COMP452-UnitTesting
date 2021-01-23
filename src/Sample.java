@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -55,20 +58,6 @@ public class Sample {
         return sum / size();
     }
 
-    /**
-     * @return standard deviation (population or sample, determined by class variable)
-     */
-    public double standardDev(){
-        double avg = mean();
-
-        double sumOfSquares = 0.0;
-        for(Double val : values){
-            sumOfSquares += (val - avg) * (val - avg);
-        }
-
-        double denominator = (usePopStdDev ? size() : size()-1);
-        return Math.sqrt( sumOfSquares / denominator );
-    }
 
     /**
      * @param low - lower bound
@@ -101,4 +90,36 @@ public class Sample {
         return 0.0;
     }
 
+    /**
+     * @param filename - file to which the method will write the sample data
+     * @throws IOException
+     */
+    public void writeToFile(String filename) throws IOException {
+        PrintWriter out = new PrintWriter(new FileWriter(filename));
+
+        out.println(lastEdited.toString());
+
+        out.println(size());
+
+        for(Double val : values){
+            out.println(val);
+        }
+
+        out.close();
+    }
+
+    /**
+     * @return standard deviation (population or sample, determined by class variable)
+     */
+    public double standardDev(){
+        double avg = mean();
+
+        double sumOfSquares = 0.0;
+        for(Double val : values){
+            sumOfSquares += (val - avg) * (val - avg);
+        }
+
+        double denominator = (usePopStdDev ? size() : size()-1);
+        return Math.sqrt( sumOfSquares / denominator );
+    }
 }

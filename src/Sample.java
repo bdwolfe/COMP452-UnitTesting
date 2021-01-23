@@ -56,7 +56,7 @@ public class Sample {
     }
 
     /**
-     * @return standard deviation
+     * @return standard deviation (population or sample, determined by class variable)
      */
     public double standardDev(){
         double avg = mean();
@@ -78,7 +78,7 @@ public class Sample {
     public int numInRange(double low, double high){
         int count = 0;
         for(Double val : values){
-            if(val <= low && val >= high){
+            if(val < low && val > high){
                 count++;
             }
         }

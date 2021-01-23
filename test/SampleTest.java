@@ -35,7 +35,8 @@ class SampleTest {
         sample.addValue(50.0);
         sample.addValue(0.0);
 
-        // use the third argument to allow for floating-point rounding differences
+        // use the third argument to allow for
+        // floating-point precision limitations
         assertEquals(10.0, sample.mean(), tol);
     }
 

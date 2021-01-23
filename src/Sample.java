@@ -85,4 +85,20 @@ public class Sample {
         return count;
     }
 
+    /**
+     * @return maximum value in the sample
+     */
+    public double max(){
+        //TODO: complete this method
+        return 0.0;
+    }
+
+    /**
+     * @return minimum value in the sample
+     */
+    public double min(){
+        //TODO: complete this method
+        return 0.0;
+    }
+
 }

@@ -29,19 +29,17 @@ class SampleTest {
     }
 
     @Test
-    void meanNegativeValue(){
+    void meanOneIntegerValue(){
         Sample sample = new Sample();
-        sample.addValue(-20.0);
         sample.addValue(50.0);
-        sample.addValue(0.0);
 
         // use the third argument to allow for
         // floating-point precision limitations
-        assertEquals(10.0, sample.mean(), tol);
+        assertEquals(50.0, sample.mean(), tol);
     }
 
     @Test
-    void meanPositiveValues(){
+    void meanFractionalValues(){
         Sample sample = new Sample();
         sample.addValue(25.3);
         sample.addValue(4.8);

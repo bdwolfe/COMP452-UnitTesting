@@ -1,8 +1,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Sample {
 
@@ -14,14 +15,14 @@ public class Sample {
     private boolean usePopStdDev;
 
     // Date when the last value was added
-    private Date lastEdited;
+    private LocalDateTime lastEdited;
 
 
     public boolean isUsingPopStdDev() {
         return usePopStdDev;
     }
 
-    public Date getLastEdited() {
+    public LocalDateTime getLastEdited() {
         return lastEdited;
     }
 
@@ -40,7 +41,7 @@ public class Sample {
      */
     public void addValue(double val){
         values.add(val);
-        lastEdited = new Date();
+        lastEdited = LocalDateTime.now();
     }
 
     public double size(){
@@ -92,7 +93,6 @@ public class Sample {
 
     /**
      * @param filename - file to which the method will write the sample data
-     * @throws IOException
      */
     public void writeToFile(String filename) throws IOException {
         PrintWriter out = new PrintWriter(new FileWriter(filename));

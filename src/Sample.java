@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class Sample {
 
+    /////////////////
+    // START of code for exercise 1
+
     // the values in the sample
     private ArrayList<Double> values;
 
@@ -18,15 +21,6 @@ public class Sample {
     private LocalDateTime lastEdited;
 
 
-    public boolean isUsingPopStdDev() {
-        return usePopStdDev;
-    }
-
-    public LocalDateTime getLastEdited() {
-        return lastEdited;
-    }
-
-
     public Sample(){
         this(false);
     }
@@ -36,6 +30,7 @@ public class Sample {
         usePopStdDev = usePopulationStandardDeviation;
     }
 
+
     /**
      * @param val - to be added to this sample
      */
@@ -44,6 +39,9 @@ public class Sample {
         lastEdited = LocalDateTime.now();
     }
 
+    /**
+     * @return the number of items in the sample
+     */
     public double size(){
         return values.size();
     }
@@ -75,11 +73,18 @@ public class Sample {
         return count;
     }
 
+    ////////////////////////////////////////////
+    // END of exercise 1 code
+    //
+    // START of exercise 2 code
+
     /**
      * @return maximum value in the sample
      */
     public double max(){
-        //TODO: complete this method
+        // NOTE: this is stub, to let the unit tests compile
+        // In a real project, we would need to complete this
+        // method after writing the unit tests
         return 0.0;
     }
 
@@ -87,9 +92,16 @@ public class Sample {
      * @return minimum value in the sample
      */
     public double min(){
-        //TODO: complete this method
+        // NOTE: this is stub, to let the unit tests compile
+        // In a real project, we would need to complete this
+        // method after writing the unit tests
         return 0.0;
     }
+
+    ////////////////////////////////////////////
+    // END of exercise 2 code
+    //
+    // START of exercise 3 code
 
     /**
      * @param filename - file to which the method will write the sample data

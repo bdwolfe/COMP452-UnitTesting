@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Sample {
@@ -50,6 +51,10 @@ public class Sample {
      * @return sample mean
      */
     public double mean(){
+        if(size() == 0){
+            throw new ArithmeticException("Cannot calculate mean of empty Sample");
+        }
+
         double sum = 0.0;
         for(Double val : values){
             sum += val;
@@ -61,12 +66,13 @@ public class Sample {
     /**
      * @param low - lower bound
      * @param high - upper bound
-     * @return number of values between low and high (inclusive)
+     * @param inclusive - if true, values equal to low or high will be counted
+     * @return number of values between low and high (or equal to low or high, if inclusive is true)
      */
-    public int numInRange(double low, double high){
+    public int numInRange(double low, double high, boolean inclusive){
         int count = 0;
         for(Double val : values){
-            if(val < low && val > high){
+            if((low < val && high > val) || (inclusive && low == val || high == val)){
                 count++;
             }
         }
@@ -78,30 +84,31 @@ public class Sample {
     //
     // START of exercise 2 code
 
-    /**
-     * @return maximum value in the sample
-     */
-    public double max(){
-        // NOTE: this is stub, to let the unit tests compile
-        // In a real project, we would need to complete this
-        // method after writing the unit tests
-        return 0.0;
+    public boolean getUsePopulationStandardDev(){
+        return usePopStdDev;
     }
 
     /**
-     * @return minimum value in the sample
+     * @return standard deviation (population or sample, determined by class variable)
      */
-    public double min(){
-        // NOTE: this is stub, to let the unit tests compile
-        // In a real project, we would need to complete this
-        // method after writing the unit tests
-        return 0.0;
+    public double standardDev(){
+        double avg = mean();
+
+        double sumOfSquares = 0.0;
+        for(Double val : values){
+            sumOfSquares += (val - avg) * (val - avg);
+        }
+
+        double denominator = (usePopStdDev ? size() : size()-1);
+        return Math.sqrt( sumOfSquares / denominator );
     }
+
 
     ////////////////////////////////////////////
     // END of exercise 2 code
     //
     // START of exercise 3 code
+
 
     /**
      * @param filename - file to which the method will write the sample data
@@ -120,18 +127,28 @@ public class Sample {
         out.close();
     }
 
-    /**
-     * @return standard deviation (population or sample, determined by class variable)
-     */
-    public double standardDev(){
-        double avg = mean();
 
-        double sumOfSquares = 0.0;
+    ////////////////////////////////////////////
+    // END of exercise 3 code
+    //
+    // START of exercise 5 code
+
+
+    /**
+     * @param prob - the probability of an item being included in the returned subsample
+     * @return a random sample of values from this; each item is included with probability prob
+     */
+    public Sample subsample(double prob){
+        Random random = new Random();
+        Sample result = new Sample(this.usePopStdDev);
+
         for(Double val : values){
-            sumOfSquares += (val - avg) * (val - avg);
+            if(random.nextDouble() <= prob){
+                result.addValue(val);
+            }
         }
 
-        double denominator = (usePopStdDev ? size() : size()-1);
-        return Math.sqrt( sumOfSquares / denominator );
+        return result;
     }
+
 }

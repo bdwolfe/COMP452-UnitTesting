@@ -47,4 +47,27 @@ class SampleTest {
         sample.addValue(100.0);
         assertEquals(33.2575, sample.mean(), tol);
     }
+
+    @Test
+    void meanMixedSigns(){
+        Sample sample = new Sample();
+        sample.addValue(10.0);
+        sample.addValue(-2.0);
+        assertEquals(4.0, sample.mean(), tol);
+    }
+
+    @Test
+    void meanNoValues(){
+        // From https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html
+        // Runtime exceptions represent problems that are the result
+        // of a programming problem, and as such, the API client code
+        // cannot reasonably be expected to recover from them or to handle
+        // them in any way. Such problems include arithmetic exceptions,
+        // such as dividing by zero;
+        Sample sample = new Sample();
+        assertThrows(ArithmeticException.class,
+                () -> { sample.mean(); }
+        );
+    }
+
 }
